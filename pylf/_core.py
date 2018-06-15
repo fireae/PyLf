@@ -16,10 +16,10 @@ _BLACK = 0
 _AMP = 2  # Amplification for 4X SSAA.
 
 
-def handwrite(text:str, page_settings:list, font, color:str, is_half_char, is_end_char, alpha:tuple, anti_aliasing:bool,
-              worker:int, seed:int) -> list:
+def handwrite(text:str, page_settings:list, font, color:str, is_half_char_fn, is_end_char_fn, alpha:tuple,
+              anti_aliasing:bool, worker:int, seed:int) -> list:
     """Do the real stuffs for handwriting simulating."""
-    pages = _draw_text(text, page_settings, font, is_half_char, is_end_char, anti_aliasing, seed)
+    pages = _draw_text(text, page_settings, font, is_half_char_fn, is_end_char_fn, anti_aliasing, seed)
     if not pages:
         return pages
     renderer = _Renderer(page_settings, color, alpha, anti_aliasing, seed)
@@ -28,7 +28,8 @@ def handwrite(text:str, page_settings:list, font, color:str, is_half_char, is_en
     return images
 
 
-def _draw_text(text:str, page_settings:list, font, is_half_char, is_end_char, anti_aliasing:bool, seed:int) -> list:
+def _draw_text(text:str, page_settings:list, font, is_half_char_fn, is_end_char_fn, anti_aliasing:bool,
+               seed:int) -> list:
     """Draws the text randomly in black images with white color. Note that (box[3] - box[1]) and (box[2] - box[0]) both
     must be greater than corresponding font_size.
     """
@@ -60,13 +61,13 @@ def _draw_text(text:str, page_settings:list, font, is_half_char, is_end_char, an
                         if char == '\n':
                             char = next(chars)
                             break
-                        if x >= right - font_size and not is_end_char(char):
+                        if x >= right - font_size and not is_end_char_fn(char):
                             break
                         actual_font_size = max(int(rand.gauss(font_size, font_size_sigma)), 0)
                         xy = (x, int(rand.gauss(y, line_spacing_sigma)))
                         font = font.font_variant(size=actual_font_size)
                         offset = _draw_char(draw, char, xy, font)
-                        x_step = word_spacing + offset * (0.5 if is_half_char(char) else 1)
+                        x_step = word_spacing + offset * (0.5 if is_half_char_fn(char) else 1)
                         x += int(rand.gauss(x_step, word_spacing_sigma))
                         char = next(chars)
                     y += line_spacing + font_size

@@ -35,9 +35,9 @@ def handwrite(text, template:dict, *, anti_aliasing:bool=True, worker:int=0, see
                 font_size / 256.
             line_spacing_sigma: A float as the sigma of the gauss distribution of the line spacing. Default:
                 font_size / 256.
-            is_half_char: A function judging whether or not a char only take up half of its original width. The function
-                must take a char parameter and return a boolean value. Default: (lambda c: False).
-            is_end_char: A function judging whether or not a char can NOT be in the beginning of the lines (e.g. '，',
+            is_half_char_fn: A function judging whether or not a char only take up half of its original width. The
+                function must take a char parameter and return a boolean value. Default: (lambda c: False).
+            is_end_char_fn: A function judging whether or not a char can NOT be in the beginning of the lines (e.g. '，',
                 '。', '》', ')', ']'). The function must take a char parameter and return a boolean value. Default:
                 (lambda c: c in _DEFAULT_END_CHARS).
             alpha: A tuple of two floats as the degree of the distortion in the horizontal and vertical direction in
@@ -73,10 +73,10 @@ def handwrite(text, template:dict, *, anti_aliasing:bool=True, worker:int=0, see
     template2['font'] = template['font']
     if 'color' in template:
         template2['color'] = template['color']
-    if 'is_half_char' in template:
-        template2['is_half_char'] = template['is_half_char']
-    if 'is_end_char' in template:
-        template2['is_end_char'] = template['is_end_char']
+    if 'is_half_char_fn' in template:
+        template2['is_half_char_fn'] = template['is_half_char_fn']
+    if 'is_end_char_fn' in template:
+        template2['is_end_char_fn'] = template['is_end_char_fn']
     if 'alpha' in template:
         template2['alpha'] = template['alpha']
 
@@ -108,9 +108,9 @@ def handwrite2(text, template2:dict, *, anti_aliasing:bool=True, worker:int=0, s
             font: A Pillow's font instance. Note that this function do not use the size attribute of the font object.
             color: A str with specific format. The format is given as 'rgb(red, green, blue)' where the color values are
                 integers in the range 0 (inclusive) to 255 (inclusive). Default: 'rgb(0, 0, 0)'.
-            is_half_char: A function judging whether or not a char only take up half of its original width. The function
-                must take a char parameter and return a boolean value. Default: (lambda c: False).
-            is_end_char: A function judging whether or not a char can NOT be in the beginning of the lines (e.g. '，',
+            is_half_char_fn: A function judging whether or not a char only take up half of its original width. The
+                function must take a char parameter and return a boolean value. Default: (lambda c: False).
+            is_end_char_fn: A function judging whether or not a char can NOT be in the beginning of the lines (e.g. '，',
                 '。', '》', ')', ']'). The function must take a char parameter and return a boolean value. Default:
                 (lambda c: c in _DEFAULT_END_CHARS).
             alpha: A tuple of two floats as the degree of the distortion in the horizontal and vertical direction in
@@ -139,8 +139,8 @@ def handwrite2(text, template2:dict, *, anti_aliasing:bool=True, worker:int=0, s
                            page_settings=page_settings,
                            font=template2['font'],
                            color=template2.get('color', 'rgb(0, 0, 0)'),
-                           is_half_char=template2.get('is_half_char', lambda c: False),
-                           is_end_char=template2.get('is_end_char', lambda c: c in _DEFAULT_END_CHARS),
+                           is_half_char_fn=template2.get('is_half_char_fn', lambda c: False),
+                           is_end_char_fn=template2.get('is_end_char_fn', lambda c: c in _DEFAULT_END_CHARS),
                            alpha=template2.get('alpha', (0.1, 0.1)),
                            anti_aliasing=anti_aliasing,
                            worker=worker if worker > 0 else multiprocessing.cpu_count() + worker,
