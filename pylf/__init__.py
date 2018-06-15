@@ -9,8 +9,9 @@ from pylf import _core
 
 __version__ = '1.2.0'
 
-# Chinese, English and other end chars
-_DEFAULT_END_CHARS = set("，。》、？；：’”】｝、！％）" + ",.>?;:]}!%)" + "′″℃℉")
+_DEFAULT_END_CHARS = set("，。》、？；：’”】｝、！％）"  # Chinese end chars
+                         ",.>?;:]}!%)"  # English end chars
+                         "′″℃℉")  # other end chars
 
 
 def handwrite(text, template: dict, *, anti_aliasing: bool = True, worker: int = 0, seed: int = None) -> list:
