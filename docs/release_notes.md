@@ -2,6 +2,11 @@
 本文档是为了让用户了解新版本的变化而撰写。新特性的添加、旧特性的删除、重大bug的修复以及不兼容性的变化等需要用户知道的重大变化在下文中将使用粗体标注。对于一般用户而言，仅需查看粗体部分即可。但还是建议闲得没事、充满好奇心或想全面了解新版本的用户看完所有新变化。
 
 
+## unreleased
+* 参数`is_half_char`和`is_end_char`分别改为`is_half_char_fn`和`is_end_char_fn`
+* `handwrite`和`handwrite2`的可选参数强制要求以keyword的形式传入
+ 
+
 ## v1.2.0 (2018-6-1)
 * __函数`handwrite`和`handwrite2`添加新可选参数`seed`，使得在设置了`seed`的情况下，结果具有可重复性__
 * docstring改为Google风格
