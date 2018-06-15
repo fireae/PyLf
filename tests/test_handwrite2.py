@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from PIL import Image as image
 from PIL import ImageDraw as image_draw
-
 from util import *
-from pylf import *
 
+from pylf import *
 
 DEFAULT_WIDTH = 500
 DEFAULT_HEIGHT = 500
@@ -40,7 +39,7 @@ def test_one_background():
     template = dict(background=background, box=box, font=font, font_size=font_size, font_size_sigma=font_size_sigma)
     template2 = dict(page_settings=[dict(background=background, box=box, font_size=font_size,
                                          font_size_sigma=font_size_sigma), ],
-                     font=font,)
+                     font=font, )
     for anti_aliasing in (True, False):
         images1 = handwrite(text, template, anti_aliasing=anti_aliasing, seed=SEED)
         images2 = handwrite2(text, template2, anti_aliasing=anti_aliasing, seed=SEED)

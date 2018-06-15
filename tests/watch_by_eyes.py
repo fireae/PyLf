@@ -3,10 +3,9 @@
 import pathlib
 
 from PIL import Image as image
-
 from util import *
-from pylf import *
 
+from pylf import *
 
 SEED = 666
 

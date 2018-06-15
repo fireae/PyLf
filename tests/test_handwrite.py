@@ -2,14 +2,12 @@
 import copy
 import multiprocessing
 
+import pytest
 from PIL import Image as image
 from PIL import ImageDraw as image_draw
-from PIL import ImageFont as image_font
-import pytest
-
 from util import *
-from pylf import handwrite
 
+from pylf import handwrite
 
 BACKGROUND_COLOR = 'rgb(255, 255, 255)'
 DEFAULT_WIDTH = 500

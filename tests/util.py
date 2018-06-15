@@ -8,7 +8,6 @@ import os
 
 from PIL import ImageFont as image_font
 
-
 THRESHOLD = 17.0
 
 
@@ -38,7 +37,7 @@ def compare_pixel(image1, image2) -> float:
     pass
 
 
-def get_path(path:str) -> str:
+def get_path(path: str) -> str:
     return os.path.join(os.path.abspath(os.path.dirname(__file__)), path)
 
 
@@ -54,4 +53,5 @@ def get_long_text() -> str:
 
 
 def get_default_font():
-    return image_font.truetype(get_path("data/fonts/Bo Le Locust Tree Handwriting Pen Chinese Font-Simplified Chinese Fonts.ttf"))
+    return image_font.truetype(
+        get_path("data/fonts/Bo Le Locust Tree Handwriting Pen Chinese Font-Simplified Chinese Fonts.ttf"))
