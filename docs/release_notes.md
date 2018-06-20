@@ -3,8 +3,8 @@
 
 
 ## unreleased
-* 参数`is_half_char`和`is_end_char`分别改为`is_half_char_fn`和`is_end_char_fn`
-* `handwrite`和`handwrite2`的可选参数强制要求以keyword的形式传入
+* __参数`is_half_char`和`is_end_char`分别改为`is_half_char_fn`和`is_end_char_fn`__
+* __`handwrite`和`handwrite2`的可选参数强制要求以keyword的形式传入__
  
 
 ## v1.2.0 (2018-6-1)
